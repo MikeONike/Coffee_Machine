@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coffee machine</title>
+
+    <!--iOS compatibility-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Website title">
+    <link rel="apple-touch-icon" href="apple-icon-180x180.png">
+
+    <!--Android compatibility-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Website title">
+    <link rel="icon" type="image/png" href="android-icon-192x192.png">
+
+    <!-- css files -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="coffee-machine">
+
+            <img class="logo" src="img/delonghi.png" alt="">
+
+            <div class="power-group">
+
+                <button id="power-btn" class="fas fa-power-off btn" onclick="coffeeMachine.switch();"></button>
+
+                <p class="power-state">On</p>
+
+            </div>
+
+            <div class="display" id="display">
+
+                <p>Credit: <span class="text-field" id="credit-status"></span></p>
+
+
+                <p id="message" class="message">_______</p>
+
+                <p>
+                    Water: <span class="text-field" id="water-status"></span> |
+                    Coffee: <span class="text-field" id="coffee-status"></span> |
+                    Milk: <span class="text-field" id="milk-status"></span> |
+                </p>
+            </div>
+
+            <div class="btns">
+                <button class="btn" id="add-credit" onclick="coffeeMachine.addCredit();">Add Credit</button>
+                <button class="btn" id="add-water" onclick="coffeeMachine.addWater();">Add Water</button>
+                <button class="btn" id="add-coffee" onclick="coffeeMachine.addCoffee();">Add Coffee</button>
+                <button class="btn" id="add-milk" onclick="coffeeMachine.addMilk();">Add Milk</button>
+                <button class="btn" id="short-espresso"
+                    onclick="coffeeMachine.makeShortEspresso();">ShortEspresso</button>
+                <button class="btn" id="long-espresso" onclick="coffeeMachine.makeLongEspresso();">Long
+                    Espresso</button>
+                <button class="btn" id="cappuccino" onclick="coffeeMachine.makeCappuccino();">Cappuccino</button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- font-awesome -->
+    <script src="https://kit.fontawesome.com/1271c8c1a6.js" crossorigin="anonymous"></script>
+
+    <!-- JS script -->
+    <script>
+        let add;
+        let message = '';
+        let messageField = document.querySelector('#message');
+        let powerState = document.querySelector('.power-state');
+        let textField = document.querySelector('.text-field');
+        let display = document.querySelector('.display');
+
+        let coffeeMachine = {
+            power: true,
+            water: 400,
+            coffee: 200,
+            milk: 100,
+            credit: 100,
+            waterStatus: function () {
+                document.querySelector('#water-status').innerText = this.water;
+            },
+            coffeeStatus: function () {
+                document.querySelector('#coffee-status').innerText = this.coffee;
+            },
+            milkStatus: function () {
+                document.querySelector('#milk-status').innerText = this.milk;
+            },
+            creditStatus: function () {
+                document.querySelector('#credit-status').innerText = this.credit + ' RSD';
+            },
+            switch: function () {
+
+                if (this.power == false) {
+                    this.power = true;
+
+                    powerState.style.color = 'green';
+                    powerState.innerText = 'On';
+                    textField.style.color = '#D1C254';
+                    display.style.color = '#fff';
+
+                } else {
+                    this.power = false;
+                    powerState.style.color = 'red';
+                    powerState.innerText = 'Off';
+                    textField.style.color = 'transparent';
+                    display.style.color = 'transparent';
+
+                }
+
+            },
+            addWater: function () {
+                if (this.power == false) {
+                    return;
+                }
+
+                add = Number(prompt('How much water you want to add?'));
+
+                if (this.water + add > 400) {
+                    alert('The value you entered is too big!');
+                } else if (add < 0) {
+                    alert('Value must not be negative!');
+                } else if (isNaN(add) == true) {
+                    alert('Value must be a valid number!');
+                } else {
+                    this.water += add;
+                    this.waterStatus();
+                }
+            },
+
+            addCoffee: function () {
+                if (this.power == false) {
+                    return;
+                }
+
+                add = Number(prompt('How much coffee you want to add?'));
+
+                if (this.coffee + add > 200) {
+                    alert('The value you entered is too big!');
+                } else if (add < 0) {
+                    alert('Value must not be negative!');
+                } else if (isNaN(add) == true) {
+                    alert('Value must be a valid number!');
+                } else {
+                    this.coffee += add;
+                    this.coffeeStatus();
+                }
+            },
+
+            addMilk: function () {
+                if (this.power == false) {
+                    return;
+                }
+
+                add = Number(prompt('How much milk you want to add?'));
+
+                if (this.milk + add > 100) {
+                    alert('The value you entered is too big!');
+                } else if (add < 0) {
+                    alert('Value must not be negative!');
+                } else if (isNaN(add) == true) {
+                    alert('Value must be a valid number!');
+                } else {
+                    this.milk += add;
+                    this.milkStatus();
+                }
+            },
+
+            addCredit: function () {
+                if (this.power == false) {
+                    return;
+                }
+
+                add = Number(prompt('How much credit you want to add?'));
+
+                if (add < 0) {
+                    alert('Value must not be negative!');
+                } else if (isNaN(add) == true) {
+                    alert('Value must be a valid number!');
+                } else {
+                    this.credit += add;
+                    this.creditStatus();
+                }
+            },
+
+            emptyWater: function (value, time) {
+                setTimeout(function () {
+                    message = 'Pouring water!'
+                    messageField.innerText = message;
+                    coffeeMachine.water -= value;
+                    coffeeMachine.waterStatus();
+                }, time);
+            },
+            emptyCoffee: function (value, time) {
+                setTimeout(function () {
+                    message = 'Pouring coffee!'
+                    messageField.innerText = message;
+                    coffeeMachine.coffee -= value;
+                    coffeeMachine.coffeeStatus();
+
+                }, time)
+            },
+            emptyMilk: function (value, time) {
+                setTimeout(function () {
+                    message = 'Pouring milk!'
+                    messageField.innerText = message;
+                    coffeeMachine.milk -= value;
+                    coffeeMachine.milkStatus();
+
+                }, time)
+            },
+
+
+            makeShortEspresso: function () {
+                message = '';
+
+                if (this.power == false) {
+                    return;
+                }
+
+                check(30, 20, 10);
+                
+                if(message != '') {
+                    return;
+                }
+
+                message = 'Prepering short esspresso!'
+                messageField.innerText = message;
+
+                this.credit -= 30;
+                this.creditStatus();
+
+                this.emptyWater(20, 1000);
+                this.emptyCoffee(10, 2000);
+
+                setTimeout(function () {
+                    message = 'Short esspresso finished!';
+                    messageField.innerText = message;
+                }, 3000);
+
+                setTimeout(function () {
+                    message = 'Remove Cup!'
+                    messageField.innerText = message;
+                }, 5000);
+
+            },
+            makeLongEspresso: function () {
+                message = '';
+
+                if (this.power == false) {
+                    return;
+                }
+
+                check(40, 40, 10);
+                
+                if(message != '') {
+                    return;
+                }
+
+                message = 'Prepering long esspresso!'
+                messageField.innerText = message;
+
+                this.credit -= 40;
+                this.creditStatus();
+
+                this.emptyWater(40, 1000);
+
+                this.emptyCoffee(10, 2000);
+
+                setTimeout(function () {
+                    message = 'Long esspresso finished!';
+                    messageField.innerText = message;
+                }, 3000);
+
+                setTimeout(function () {
+                    message = 'Remove Cup!'
+                    messageField.innerText = message;
+                }, 5000);
+
+            },
+            makeCappuccino: function () {
+                message = '';
+
+                if (this.power == false) {
+                    return;
+                }
+
+                check(50, 50, 20, 10);
+
+                if (message != '') {
+                    return;
+                }
+
+                message = 'Prepering Cappuccino!'
+                messageField.innerText = message;
+
+                this.credit -= 50;
+                this.creditStatus();
+
+                this.emptyWater(20, 1000);
+
+                this.emptyCoffee(10, 2000);
+
+                this.emptyMilk(10, 3000);
+
+                setTimeout(function () {
+                    message = 'Cappuccino finished!'
+                    messageField.innerText = message;
+                }, 4000);
+
+                setTimeout(function () {
+                    message = 'Remove Cup!'
+                    messageField.innerText = message;
+                }, 6000);
+
+            },
+
+        };
+
+        coffeeMachine.waterStatus();
+        coffeeMachine.coffeeStatus();
+        coffeeMachine.milkStatus();
+        coffeeMachine.creditStatus();
+
+        function check(value1, value2, value3, value4 = 0) {
+            if (coffeeMachine.credit < value1) {
+                message = 'There is no enough credit!\n';
+                messageField.innerText = message;
+
+            } else if (coffeeMachine.water < value2) {
+                message = 'Machine is out of water\n'
+                messageField.innerText = message;
+
+            } else if (coffeeMachine.coffee < value3) {
+                message = 'Machine is out of Coffee\n';
+                messageField.innerText = message;
+
+            } else if (coffeeMachine.milk < value4) {
+                message = 'Machine is out of Milk\n';
+                messageField.innerText = message;
+
+            }
+
+        };
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap');
+
+/* 
+
+font-family: 'Share Tech Mono', monospace;
+
+*/
+
+html {
+    font-size:10px;
+}
+
+body {
+    font-size:1.6rem;
+}
+
+.container {
+    max-width: 1000px;
+    margin:0 auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.btn {
+    border:none;
+    background:none;
+    cursor:pointer;
+    background:#fff;
+    color:#000;
+    border-radius: 10px;
+    padding:10px;
+    font-size: 2rem;
+    font-weight: bold;
+    outline:none;
+    margin-bottom:2rem;
+}
+
+
+/* 
+====================================
+*/
+
+.coffee-machine {
+    background:#D1D1C0;
+    padding:2rem 10rem;
+}
+
+.logo {
+    width:500px;
+    margin:0 auto;
+    margin-bottom:2rem;
+}
+
+.fa-power-off {
+    font-size:4rem;
+    color:#FF5E5B;
+    background:rgb(112, 112, 102);
+    padding:1.5rem;
+    border-radius: 50%;
+    margin-bottom:0;
+}
+
+.power-group {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:2rem 0;
+}
+
+.power-state {
+    color:green;
+    background:#000;
+    padding:2rem;
+    font-size:2.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    border-radius: 10px;
+    width:100px;
+    text-align: center;
+}
+
+.display {
+    background:#000;
+    border-radius: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    /* color:transparent; */
+    color:#fff;
+    padding:3rem;
+    font-size:2.5rem;
+    margin-bottom:2rem;
+}
+
+.display p {
+    margin-bottom:3rem;
+}
+
+.display p:last-of-type{
+    margin-bottom:0;
+}
+
+.display .message {
+    font-size:4rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding:2rem;
+}
+
+.display .text-field {
+    /* color:transparent; */
+    color:#D1C254;
+}
+
+.btns {
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: space-between;
+}
+
+.btns button {
+    flex:0 0 30%;
+}
+
+.btns button:first-of-type {
+    flex:0 0 100%;
+}
+
+.btns button:nth-of-type(n+5) {
+    color:#fff;
+    background:rgb(112, 112, 102);
+}
+
+
